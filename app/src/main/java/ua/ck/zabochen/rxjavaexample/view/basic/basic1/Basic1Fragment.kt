@@ -2,7 +2,6 @@ package ua.ck.zabochen.rxjavaexample.view.basic.basic1
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +10,11 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 
-class Basic1Fragment : Fragment() {
-
-    private val TAG: String = Basic1Fragment::class.java.simpleName
+class Basic1Fragment : Fragment(), AnkoLogger {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_basic1, container, false)
@@ -25,27 +24,10 @@ class Basic1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Observable
-        val observable: Observable<String> = Observable.just("Basic_1", "Basic_2", "Basic_3")
+        val observable: Observable<String> = getObservable()
 
         // Observer
-        val observer: Observer<String> = object : Observer<String> {
-            override fun onSubscribe(d: Disposable) {
-                Log.i(TAG, "fun onSubscribe")
-            }
-
-            override fun onNext(t: String) {
-                Log.i(TAG, "fun onNext => $t")
-                Thread.sleep(3000)
-            }
-
-            override fun onComplete() {
-                Log.i(TAG, "fun onComplete")
-            }
-
-            override fun onError(e: Throwable) {
-                Log.i(TAG, "fun onError => ${e.stackTrace}")
-            }
-        }
+        val observer: Observer<String> = getObserver()
 
         // Subscription
         observable
@@ -55,6 +37,30 @@ class Basic1Fragment : Fragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer)
 
+    }
+
+    private fun getObservable(): Observable<String> {
+        return Observable.just("Basic_1", "Basic_2", "Basic_3")
+    }
+
+    private fun getObserver(): Observer<String> {
+        return object : Observer<String> {
+            override fun onSubscribe(d: Disposable) {
+                info { "fun onSubscribe" }
+            }
+
+            override fun onNext(t: String) {
+                info { "fun onNext => $t" }
+            }
+
+            override fun onComplete() {
+                info { "fun onComplete" }
+            }
+
+            override fun onError(e: Throwable) {
+                info { "fun onError => ${e.stackTrace}" }
+            }
+        }
     }
 
 }

@@ -30,6 +30,7 @@ dependencies {
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.anko:anko-commons:0.10.5"
 
     // RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.1.12'
