@@ -41,6 +41,9 @@ class Basic2Fragment : Fragment(), AnkoLogger {
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                .filter {
+                    return@filter it.endsWith("1")
+                }
                 .subscribe(observer)
     }
 
@@ -56,12 +59,13 @@ class Basic2Fragment : Fragment(), AnkoLogger {
 
     private fun getObservable(): Observable<String> {
         return Observable
-                .just("Basic2_1", "Basic2_2", "Basic2_1", "Basic2_1", "Basic2_3", "Basic2_5", "Basic2_3")
+                .just("Basic2_1", "Basic2_2", "Basic2_1", "Basic2_1", "Basic2_3", "Basic2_5", "Basic2_Last")
     }
 
     private fun getObserver(): Observer<String> {
         return object : Observer<String> {
             override fun onSubscribe(d: Disposable) {
+                info { "fun onSubscribe" }
                 disposable = d
             }
 
