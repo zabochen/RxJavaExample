@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import ua.ck.zabochen.rxjavaexample.R
-import ua.ck.zabochen.rxjavaexample.view.basic.basic2.Basic2Fragment
+import ua.ck.zabochen.rxjavaexample.view.basic.basic4.Basic4Fragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun setFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(fragmentHolder.id, Basic2Fragment())
+                .replace(fragmentHolder.id, Basic4Fragment())
                 .commit()
     }
 
