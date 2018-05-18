@@ -71,10 +71,16 @@ class Basic4Fragment : Fragment(), AnkoLogger {
         return Observable.create(
                 object : ObservableOnSubscribe<User> {
                     override fun subscribe(emitter: ObservableEmitter<User>) {
+                        // onNext
                         for (i in 0 until userList.size) {
                             if (!emitter.isDisposed) {
                                 emitter.onNext(userList[i])
                             }
+                        }
+
+                        // onComplete
+                        if (!emitter.isDisposed) {
+                            emitter.onComplete()
                         }
                     }
                 }
