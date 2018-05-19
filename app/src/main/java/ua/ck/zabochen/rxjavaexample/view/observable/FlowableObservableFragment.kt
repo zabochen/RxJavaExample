@@ -5,12 +5,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.*
+import io.reactivex.Flowable
+import io.reactivex.FlowableSubscriber
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.reactivestreams.Subscription
 import ua.ck.zabochen.rxjavaexample.R
 
 class FlowableObservableFragment : Fragment(), AnkoLogger {
@@ -35,7 +37,7 @@ class FlowableObservableFragment : Fragment(), AnkoLogger {
         super.onViewCreated(view, savedInstanceState)
 
         // Observer
-        val observer: Observer<Int> = getObserver()
+        val observer: FlowableSubscriber<Int> = getObserver()
 
         // Observable
         val observable: Flowable<Int> = getObservable()
@@ -55,32 +57,25 @@ class FlowableObservableFragment : Fragment(), AnkoLogger {
     }
 
     private fun getObservable(): Flowable<Int> {
-        return Flowable.create(
-                object : FlowableOnSubscribe<Int> {
-                    override fun subscribe(emitter: FlowableEmitter<Int>) {
-                    }
-                },
-                BackpressureStrategy.BUFFER
-        )
+        return Flowable.range(1, 100)
     }
 
-    private fun getObserver(): Observer<Int> {
-        return object : Observer<Int> {
-            override fun onSubscribe(d: Disposable) {
-                mDisposable = d
+    private fun getObserver(): FlowableSubscriber<Int> {
+        return object : FlowableSubscriber<Int> {
+            override fun onSubscribe(s: Subscription) {
                 info { "onSubscribe" }
+            }
+
+            override fun onNext(t: Int?) {
+                info { "onNext => $t" }
             }
 
             override fun onComplete() {
                 info { "onComplete" }
             }
 
-            override fun onNext(t: Int) {
-                info { "onNext: $t" }
-            }
-
-            override fun onError(e: Throwable) {
-                info { "onError => ${e.printStackTrace()}" }
+            override fun onError(t: Throwable?) {
+                info { "onError => ${t.toString()}" }
             }
         }
     }
