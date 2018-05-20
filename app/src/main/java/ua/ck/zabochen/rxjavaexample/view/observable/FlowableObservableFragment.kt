@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.reactivex.Flowable
-import io.reactivex.FlowableSubscriber
-import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.MaybeObserver
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.functions.BiFunction
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.reactivestreams.Subscription
 import ua.ck.zabochen.rxjavaexample.R
 
 class FlowableObservableFragment : Fragment(), AnkoLogger {
@@ -37,15 +35,18 @@ class FlowableObservableFragment : Fragment(), AnkoLogger {
         super.onViewCreated(view, savedInstanceState)
 
         // Observer
-        val observer: FlowableSubscriber<Int> = getObserver()
+        val observer: MaybeObserver<Int> = getObserver()
 
         // Observable
         val observable: Flowable<Int> = getObservable()
 
         // Subscription
         observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .reduce(object : BiFunction<Int, Int, Int> {
+                    override fun apply(t1: Int, t2: Int): Int {
+                        return t1 + t2
+                    }
+                })
                 .subscribe(observer)
     }
 
@@ -57,25 +58,26 @@ class FlowableObservableFragment : Fragment(), AnkoLogger {
     }
 
     private fun getObservable(): Flowable<Int> {
-        return Flowable.range(1, 100)
+        return Flowable.just(1, 2, 3, 4, 5)
     }
 
-    private fun getObserver(): FlowableSubscriber<Int> {
-        return object : FlowableSubscriber<Int> {
-            override fun onSubscribe(s: Subscription) {
+    private fun getObserver(): MaybeObserver<Int> {
+        return object : MaybeObserver<Int> {
+            override fun onSubscribe(d: Disposable) {
+                mDisposable = d
                 info { "onSubscribe" }
             }
 
-            override fun onNext(t: Int?) {
-                info { "onNext => $t" }
+            override fun onSuccess(t: Int) {
+                info { "onSuccess => $t" }
             }
 
             override fun onComplete() {
                 info { "onComplete" }
             }
 
-            override fun onError(t: Throwable?) {
-                info { "onError => ${t.toString()}" }
+            override fun onError(e: Throwable) {
+                info { "onError => ${e.stackTrace}" }
             }
         }
     }
