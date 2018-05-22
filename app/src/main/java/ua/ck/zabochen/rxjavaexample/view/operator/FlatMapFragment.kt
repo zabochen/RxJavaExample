@@ -120,7 +120,7 @@ class FlatMapFragment : Fragment(), AnkoLogger {
                     override fun subscribe(emitter: ObservableEmitter<User>) {
                         if (!mDisposable.isDisposed) {
                             user.email = emailList[Random().nextInt(10)]
-                            Thread.sleep(2000)
+                            Thread.sleep((Random().nextInt(5000) + 500).toLong())
                             emitter.onNext(user)
                             emitter.onComplete()
                         }
