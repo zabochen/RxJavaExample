@@ -20,6 +20,13 @@ import ua.ck.zabochen.rxjavaexample.model.User
 
 class MapFragment : Fragment(), AnkoLogger {
 
+    /*
+    * Map operator transform each item emitted by an Observable and emits the modified item.
+    * We have an Observable that makes a network call and emits the User objects with name and gender.
+    * But we need an email address to be present for each user, which is missing in the network response.
+    * We can alter each User object by applying Map() operation.
+    */
+
     private lateinit var mDisposable: Disposable
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -41,9 +48,9 @@ class MapFragment : Fragment(), AnkoLogger {
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(object : Function<User, User> {
                     override fun apply(t: User): User {
-                        val user = t
-                        user.name = t.name.toUpperCase()
-                        return user
+                        t.name.toUpperCase()
+                        t.email = String.format("%s@mail.com", t.name)
+                        return t
                     }
 
                 })
@@ -93,7 +100,7 @@ class MapFragment : Fragment(), AnkoLogger {
             }
 
             override fun onNext(t: User) {
-                info { "Next => ID: ${t.id}, NAME: ${t.name}" }
+                info { "Next => ID: ${t.id}, NAME: ${t.name}, EMAIL: ${t.email}" }
             }
 
             override fun onComplete() {

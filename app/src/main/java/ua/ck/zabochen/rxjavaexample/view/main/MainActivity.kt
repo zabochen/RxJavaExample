@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
 import ua.ck.zabochen.rxjavaexample.R
-import ua.ck.zabochen.rxjavaexample.view.operator.MapFragment
+import ua.ck.zabochen.rxjavaexample.view.operator.ConcatMapFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +24,7 @@ class MainActivity : AppCompatActivity() {
     private fun setFragment() {
         supportFragmentManager
                 .beginTransaction()
-                .replace(fragmentHolder.id, MapFragment())
+                .replace(fragmentHolder.id, ConcatMapFragment())
                 .commit()
     }
 
