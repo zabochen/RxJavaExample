@@ -27,6 +27,7 @@ class FlatMapFragment : Fragment(), AnkoLogger {
     *  Now the requirement is to create an Observable that emits Users with name, gender and address properties.
     *  To achieve this, we need to get the users first, then make separate network call for each user to fetch his address.
     *  This can be done easily using FlatMap operator.
+    *  Choose FlatMap when the order is not important.
     */
 
     private lateinit var mDisposable: Disposable
