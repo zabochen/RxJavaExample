@@ -2,7 +2,7 @@ package ua.ck.zabochen.rxjavaexample.view.binding
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -26,7 +26,7 @@ import org.jetbrains.anko.AnkoLogger
 import ua.ck.zabochen.rxjavaexample.R
 import java.util.concurrent.TimeUnit
 
-class ClickListenerFragment : Fragment(), AnkoLogger {
+class ClickListenerFragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     private lateinit var mCompositeDisposable: CompositeDisposable
     private lateinit var mButterKnifeUnbinder: Unbinder
