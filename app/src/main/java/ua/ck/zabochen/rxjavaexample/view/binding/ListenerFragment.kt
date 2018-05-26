@@ -26,7 +26,7 @@ import org.jetbrains.anko.AnkoLogger
 import ua.ck.zabochen.rxjavaexample.R
 import java.util.concurrent.TimeUnit
 
-class ClickListenerFragment : Fragment(), AnkoLogger {
+class ListenerFragment : Fragment(), AnkoLogger {
 
     private lateinit var mCompositeDisposable: CompositeDisposable
     private lateinit var mButterKnifeUnbinder: Unbinder
