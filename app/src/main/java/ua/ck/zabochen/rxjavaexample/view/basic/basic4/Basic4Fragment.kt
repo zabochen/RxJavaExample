@@ -2,7 +2,7 @@ package ua.ck.zabochen.rxjavaexample.view.basic.basic4
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 import ua.ck.zabochen.rxjavaexample.view.basic.basic4.model.User
 
-class Basic4Fragment : Fragment(), AnkoLogger {
+class Basic4Fragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     // Disposable container
     private lateinit var compositeDisposable: CompositeDisposable

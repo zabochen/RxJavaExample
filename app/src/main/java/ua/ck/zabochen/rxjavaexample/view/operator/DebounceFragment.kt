@@ -2,7 +2,7 @@ package ua.ck.zabochen.rxjavaexample.view.operator
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +23,7 @@ import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 import java.util.concurrent.TimeUnit
 
-class DebounceFragment : Fragment(), AnkoLogger {
+class DebounceFragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     /*
     * Debounce operators emits items only when a specified time span is passed.

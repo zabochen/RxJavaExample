@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.observable
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 import ua.ck.zabochen.rxjavaexample.model.Note
 
-class ObservableFragment : Fragment(), AnkoLogger {
+class ObservableFragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     /*
     Observable   Observer   Emissions

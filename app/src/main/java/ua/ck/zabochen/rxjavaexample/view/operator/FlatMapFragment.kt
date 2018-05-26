@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.operator
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +19,7 @@ import ua.ck.zabochen.rxjavaexample.R
 import ua.ck.zabochen.rxjavaexample.model.User
 import java.util.*
 
-class FlatMapFragment : Fragment(), AnkoLogger {
+class FlatMapFragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     /*
     *  We have a network call to fetch Users with name and gender.

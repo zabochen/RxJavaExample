@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.basic.basic1
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 
-class Basic1Fragment : Fragment(), AnkoLogger {
+class Basic1Fragment : androidx.fragment.app.Fragment(), AnkoLogger {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_basic1, container, false)
