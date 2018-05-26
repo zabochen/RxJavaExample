@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.operator.operator5
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 
-class Operator5Fragment : androidx.fragment.app.Fragment(), AnkoLogger {
+class Operator5Fragment : Fragment(), AnkoLogger {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_operator5, container, false)

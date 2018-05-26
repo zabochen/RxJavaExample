@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.observable
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,7 @@ import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 import ua.ck.zabochen.rxjavaexample.model.Note
 
-class SingleObservableFragment : androidx.fragment.app.Fragment(), AnkoLogger {
+class SingleObservableFragment : Fragment(), AnkoLogger {
 
     /*
     Single always emits only one value or throws an error.

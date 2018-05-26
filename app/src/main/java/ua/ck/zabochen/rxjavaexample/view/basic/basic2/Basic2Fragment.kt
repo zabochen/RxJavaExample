@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.basic.basic2
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 
-class Basic2Fragment : androidx.fragment.app.Fragment(), AnkoLogger {
+class Basic2Fragment : Fragment(), AnkoLogger {
 
     private lateinit var disposable: Disposable
 

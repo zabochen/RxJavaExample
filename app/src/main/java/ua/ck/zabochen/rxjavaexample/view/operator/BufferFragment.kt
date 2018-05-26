@@ -1,7 +1,7 @@
 package ua.ck.zabochen.rxjavaexample.view.operator
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +14,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 
-class BufferFragment : androidx.fragment.app.Fragment(), AnkoLogger {
+class BufferFragment : Fragment(), AnkoLogger {
 
     /*
     * Buffer gathers items emitted by an Observable into batches and emit the batch instead of emitting one item at a time.
