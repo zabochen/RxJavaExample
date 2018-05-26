@@ -22,9 +22,9 @@ class MapFragment : Fragment(), AnkoLogger {
 
     /*
     * Map operator transform each item emitted by an Observable and emits the modified item.
-    * We have an Observable that makes a network call and emits the User objects with name and gender.
+    * We have an Observable that makes a network call and emits the User1 objects with name and gender.
     * But we need an email address to be present for each user, which is missing in the network response.
-    * We can alter each User object by applying Map() operation.
+    * We can alter each User1 object by applying Map() operation.
     */
 
     private lateinit var mDisposable: Disposable

@@ -53,7 +53,7 @@ class Basic3Fragment : Fragment(), AnkoLogger {
                         .subscribeWith(adminObserver)
         )
 
-        // User Subscription
+        // User1 Subscription
         compositeDisposable.add(
                 observable
                         .subscribeOn(Schedulers.io())
@@ -100,7 +100,7 @@ class Basic3Fragment : Fragment(), AnkoLogger {
     private fun getUserObserver(): DisposableObserver<String> {
         return object : DisposableObserver<String>() {
             override fun onNext(t: String) {
-                info { "User: $t" }
+                info { "User1: $t" }
             }
 
             override fun onComplete() {

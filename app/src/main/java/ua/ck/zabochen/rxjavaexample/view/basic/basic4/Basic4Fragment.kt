@@ -61,7 +61,7 @@ class Basic4Fragment : Fragment(), AnkoLogger {
 
     private fun getUserObservable(): Observable<User> {
 
-        // Fill User List
+        // Fill User1 List
         val userList: ArrayList<User> = ArrayList()
         for (i in 1..10) {
             userList.add(User(i, "User_$i"))

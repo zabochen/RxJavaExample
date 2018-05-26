@@ -80,7 +80,7 @@ class ConcatMapFragment : Fragment(), AnkoLogger {
 
     private fun getUserObservable(): Observable<User> {
 
-        // User List
+        // User1 List
         val userList: ArrayList<User> = ArrayList()
         for (i in 1..10) {
             userList.add(User(i, "User_$i"))

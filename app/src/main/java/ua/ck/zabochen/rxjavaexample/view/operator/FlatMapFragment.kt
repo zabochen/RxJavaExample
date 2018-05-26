@@ -86,7 +86,7 @@ class FlatMapFragment : Fragment(), AnkoLogger {
 
     private fun getUserObservable(): Observable<User> {
 
-        // User List => 10 Users
+        // User1 List => 10 Users
         val userList: ArrayList<User> = ArrayList()
         for (i in 1..10) {
             userList.add(User(i, "User_$i"))

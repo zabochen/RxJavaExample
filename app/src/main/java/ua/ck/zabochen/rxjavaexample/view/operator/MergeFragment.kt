@@ -18,12 +18,10 @@ import org.jetbrains.anko.info
 import ua.ck.zabochen.rxjavaexample.R
 import ua.ck.zabochen.rxjavaexample.model.User
 
-class ConcatFragment : Fragment(), AnkoLogger {
+class MergeFragment : Fragment(), AnkoLogger {
 
     /*
-    * Concat operator combines output of two or more Observables into a single Observable.
-    * Concat operator always maintains the sequential execution without interleaving the emissions.
-    * So the first Observables completes its emission before the second starts and so forth if there are more observables.
+    * Merge also merges multiple Observables into a single Observable but it won’t maintain the sequential execution.
     */
 
     private lateinit var mCompositeDisposable: CompositeDisposable
@@ -34,15 +32,15 @@ class ConcatFragment : Fragment(), AnkoLogger {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_concat, container, false)
+        return inflater.inflate(R.layout.fragment_merge, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observer
-        val disposableObserver: DisposableObserver<User> =
-                object : DisposableObserver<User>() {
+        mCompositeDisposable.add(Observable.merge(getMaleObservable(), getFemaleObservable())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableObserver<User>() {
                     override fun onNext(t: User) {
                         info { "onNext => ID: ${t.id}, NAME: ${t.name}, GENDER: ${t.gender}" }
                     }
@@ -54,15 +52,8 @@ class ConcatFragment : Fragment(), AnkoLogger {
                     override fun onError(e: Throwable) {
                         info { "onError => ${e.printStackTrace()}" }
                     }
-                }
-        // Add to holder
-        mCompositeDisposable.add(disposableObserver)
-
-        // Observable & Subscription
-        Observable.concat(getMaleObservable(), getFemaleObservable())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(disposableObserver)
+                })
+        )
     }
 
     override fun onDetach() {
@@ -71,54 +62,50 @@ class ConcatFragment : Fragment(), AnkoLogger {
     }
 
     private fun getMaleObservable(): Observable<User> {
+        // Male List
         val maleList: ArrayList<User> = ArrayList()
         for (i in 1..10) {
             maleList.add(User(i, "User_$i", "Male"))
         }
 
-        return Observable.create(
-                object : ObservableOnSubscribe<User> {
+        return Observable
+                .create(object : ObservableOnSubscribe<User> {
                     override fun subscribe(emitter: ObservableEmitter<User>) {
-                        // onNext
-                        for (user in maleList) {
-                            if (!emitter.isDisposed) {
-                                emitter.onNext(user)
-                                Thread.sleep(1000)
-                            }
-                        }
-
-                        // onComplete
                         if (!emitter.isDisposed) {
+                            // onNext
+                            for (male in maleList) {
+                                Thread.sleep(2000)
+                                emitter.onNext(male)
+                            }
+                            // onComplete
                             emitter.onComplete()
                         }
                     }
-                }
-        )
+                })
+                .subscribeOn(Schedulers.io())
     }
 
     private fun getFemaleObservable(): Observable<User> {
+        // Female List
         val femaleList: ArrayList<User> = ArrayList()
         for (i in 1..10) {
             femaleList.add(User(i, "User_$i", "Female"))
         }
 
-        return Observable.create(
-                object : ObservableOnSubscribe<User> {
+        return Observable
+                .create(object : ObservableOnSubscribe<User> {
                     override fun subscribe(emitter: ObservableEmitter<User>) {
-                        // onNext
-                        for (user in femaleList) {
-                            if (!emitter.isDisposed) {
-                                emitter.onNext(user)
-                            }
-                        }
-
-                        // onComplete
                         if (!emitter.isDisposed) {
+                            // onNext
+                            for (female in femaleList) {
+                                Thread.sleep(1000)
+                                emitter.onNext(female)
+                            }
+                            // onComplete
                             emitter.onComplete()
                         }
                     }
-                }
-        )
+                })
+                .subscribeOn(Schedulers.io())
     }
-
 }

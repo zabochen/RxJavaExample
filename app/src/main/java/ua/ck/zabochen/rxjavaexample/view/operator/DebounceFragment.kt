@@ -27,7 +27,7 @@ class DebounceFragment : Fragment(), AnkoLogger {
 
     /*
     * Debounce operators emits items only when a specified time span is passed.
-    * User want to search for `RxJava`. Without debounce, there would be multiple calls to server
+    * User1 want to search for `RxJava`. Without debounce, there would be multiple calls to server
     * for keywords `R`, `Rx`, `RxJ` and so on. Instead we can give user a time period say 300 milli sec
     * to type and send the query the to server. Most probably user can type `RxJ` in the given time period.
     */
