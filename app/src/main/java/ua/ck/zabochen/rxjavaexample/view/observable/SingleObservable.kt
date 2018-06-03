@@ -49,7 +49,7 @@ class SingleObservable : Fragment(), AnkoLogger {
         observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(observer)
+                .subscribe(observer)
     }
 
     override fun onDetach() {

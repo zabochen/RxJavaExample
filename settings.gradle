@@ -1,1 +1,1 @@
-include ':app', ':appnetwork'
+include ':app', ':appnetwork', ':flighttickets', ':appflighttickets'
