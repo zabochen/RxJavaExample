@@ -10,21 +10,21 @@ interface ApiService {
 
     // Register user
     @POST("notes/user/register")
-    fun registerUser(@Field("device_id") deviseId: String): Single<User>
+    fun registerUser(@Field("device_id") deviceId: String): Single<User>
 
-    // Create note
+    // Create mNote
     @POST("notes/new")
-    fun createNote(@Field("note") note: String): Single<Note>
+    fun createNote(@Field("mNote") note: String): Single<Note>
 
     // Get all notes
     @GET("notes/all")
     fun getAllNotes(): Single<List<Note>>
 
-    // Update note
+    // Update mNote
     @PUT("notes/{id}")
-    fun updateNote(@Path("id") noteId: Int, @Field("note") note: String): Completable
+    fun updateNote(@Path("id") noteId: Int, @Field("mNote") note: String): Completable
 
-    // Delete note
+    // Delete mNote
     @DELETE("notes/{id}")
     fun deleteNote(@Path("id") noteId: Int)
 
